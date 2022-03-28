@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Register from "../views/Register.vue";
-import Form from "../components/Form.vue";
+import Counter from "../views/Counter.vue";
 
 Vue.use(VueRouter);
 
@@ -25,13 +25,11 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-    children: [
-      {
-        path: "",
-        name: "Form",
-        component: Form,
-      },
-    ],
+  },
+  {
+    path: "/counter",
+    name: "Counter",
+    component: Counter,
   },
 ];
 
