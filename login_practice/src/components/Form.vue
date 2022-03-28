@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Form",
   data() {
@@ -34,9 +35,11 @@ export default {
     };
   },
   methods: {
-    submitSignup() {
-      console.log(this.input);
-      console.log(this.checkPw(this.input.userPw));
+    ...mapActions("memberStore", ["setSignup"]),
+    async submitSignup() {
+      if (this.checkPw(this.input.userPw)) {
+        await this.setSignup(this.input);
+      }
     },
     checkPw(pw) {
       // 8~16자리, 최소 숫자 1개, 특수문자 1개, 영문자 1개

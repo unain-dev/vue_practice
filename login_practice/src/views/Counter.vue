@@ -15,7 +15,7 @@ export default {
     // count() {
     //   return this.$store.state.count;
     // },
-    ...mapState(["count"]),
+    ...mapState("counterStore", ["count"]),
   },
   methods: {
     // mutation을 그냥 method에 선언해서 사용. -> mapMutation으로 대체.
@@ -23,14 +23,12 @@ export default {
     //   this.$store.commit("addOne");
     // },
     // mutation을 mapMutations를 이용해서 사용.
-    ...mapMutations({
-      addOne: "addOne",
-    }),
+    ...mapMutations("counterStore", ["addOne"]),
     // action을 그냥 method에 선언해서 사용.
     // initializeAction: function () {
     //   this.$store.dispatch("initializeAction");
     // },
-    ...mapActions(["initializeAction"]),
+    ...mapActions("counterStore", ["initializeAction"]),
   },
 };
 </script>

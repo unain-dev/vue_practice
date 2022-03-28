@@ -3,12 +3,12 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import memberStroe from "./memberStore";
+import memberStore from "./memberStore";
 import counterStore from "./counterStore";
 
 const store = new Vuex.Store({
   modules: {
-    memberStroe,
+    memberStore,
     counterStore,
   },
 });

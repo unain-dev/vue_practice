@@ -1,32 +1,37 @@
+import { signup } from "../api/member";
+import router from "../router";
+
 const memberStore = {
+  namespaced: true,
   state: {
-    count: 0,
-    userid: null,
-  },
-  getters: {
-    getCount(state) {
-      return state.count;
-    },
-  },
-  actions: {
-    initializeAction(context) {
-      let init = 0; // 비동기통신으로 가져온 값.
-      context.commit("initialize", init);
+    memberInfo: {
+      userId: null,
+      userEmail: null,
     },
   },
   mutations: {
-    addOne(state) {
-      state.count += 1;
-    },
-    initialize(state, payload) {
-      return (state.count = payload);
+    SIGNUP(state, payload) {
+      state.memberInfo.userId = payload.userId;
+      state.memberInfo.userEmail = payload.userEmail;
     },
   },
-  // state ♡ computed
-  // action ♡ dispatch ♡ context ♡ 비동기 통신
-  // mutation ♡ commit ♡ state ♡ state 값 세팅
-  // 비동기통신으로 가져온 값을 store에 저장 :
-  // action을 dispatch -> response를 mutation에 파라미터로 넘겨 값 갱신
+  actions: {
+    setSignup(context, param) {
+      console.log(param);
+      signup(
+        param,
+        (response) => {
+          console.log(response);
+          if (response.status === 200) {
+            context.commit("SIGNUP", param);
+            alert("회원가입이 완료 되었습니다.");
+            router.push({ name: "Home" });
+          }
+        },
+        () => {}
+      );
+    },
+  },
 };
 
 export default memberStore;
