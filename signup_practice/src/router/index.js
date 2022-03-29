@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
 import List from "../views/List.vue";
+import Detail from "../views/Detail.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ const routes = [
     path: "/list",
     name: "List",
     component: List,
+  },
+  {
+    path: "/detail/:seq",
+    name: "Detail",
+    component: Detail,
   },
 ];
 

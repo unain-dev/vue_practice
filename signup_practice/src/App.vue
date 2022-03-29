@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/signup">회원가입</router-link>|
-      <router-link to="/list">리스트</router-link>
+      <router-link to="/list">리스트</router-link>|
+      <router-link to="/detail/1">상세페이지</router-link>
     </div>
     <router-view />
   </div>
