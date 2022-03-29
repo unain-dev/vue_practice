@@ -1,27 +1,34 @@
 <template>
   <div>
-    <div><input type="text" placeholder="ID" v-model="userInfo.userId" /></div>
     <div>
-      <input type="password" placeholder="PW" v-model="userInfo.userPw" />
+      <input type="text" placeholder="ID" v-model="userInfoInput.userId" />
     </div>
     <div>
-      <input type="text" placeholder="Name" v-model="userInfo.userName" />
+      <input type="password" placeholder="PW" v-model="userInfoInput.userPw" />
     </div>
     <div>
-      <input type="email" placeholder="Email" v-model="userInfo.userEmail" />
+      <input type="text" placeholder="Name" v-model="userInfoInput.userName" />
+    </div>
+    <div>
+      <input
+        type="email"
+        placeholder="Email"
+        v-model="userInfoInput.userEmail"
+      />
     </div>
     <button @click="submitSignup">회원가입</button>
+    <div>{{ userInfo.userId }}</div>
   </div>
 </template>
 
 <script>
-import { apiSignup } from "../api/signup";
+import { mapGetters, mapState, mapActions } from "vuex";
 
 export default {
   name: "Form",
   data() {
     return {
-      userInfo: {
+      userInfoInput: {
         userId: null,
         userPw: null,
         userEmail: null,
@@ -30,8 +37,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions("memberStore", ["setUserInfo"]),
     checkFrom() {
-      if (this.userInfo.userPw.length >= 8) {
+      if (this.userInfoInput.userPw.length >= 8) {
         return true;
       } else {
         return false;
@@ -39,20 +47,15 @@ export default {
     },
     submitSignup() {
       if (this.checkFrom()) {
-        apiSignup(
-          this.userInfo,
-          (response) => {
-            if (response.data.status == 200) {
-              alert("회원가입이 완료되었습니다.");
-              this.$router.push({ name: "Home" });
-            }
-          },
-          () => {}
-        );
+        this.setUserInfo(this.userInfoInput);
       } else {
         alert("비밀번호는 8자 이상이어야합니다.");
       }
     },
+  },
+  computed: {
+    ...mapGetters("memberStore", ["getUserInfo"]),
+    ...mapState("memberStore", ["userInfo"]),
   },
 };
 </script>

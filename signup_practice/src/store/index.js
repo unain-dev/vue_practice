@@ -4,7 +4,7 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import memberStore from "./modules/memberStore";
-const store = new Vue({
+const store = new Vuex.Store({
   modules: {
     memberStore,
   },
