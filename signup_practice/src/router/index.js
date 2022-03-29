@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
+import List from "../views/List.vue";
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,11 @@ const routes = [
     name: "Signup",
     component: Signup,
   },
+  {
+    path: "/list",
+    name: "List",
+    component: List,
+  },
 ];
 
 const router = new VueRouter({
@@ -34,3 +40,4 @@ const router = new VueRouter({
 });
 
 export default router;
+
